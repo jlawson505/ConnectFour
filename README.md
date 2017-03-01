@@ -21,6 +21,6 @@ be prompted to start a new Game.
 you will need to edit the "host" value in the player client to reflect 
 the host you are running the server on.
 
-In Windows, just type "hostname" in the command prompt to dee the name
+In Windows, just type "hostname" in the command prompt to see the name
 
 
