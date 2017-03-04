@@ -19,7 +19,7 @@ import java.net.Socket;
  */
 public class PlayerClient implements Runnable
 {
-    private final String HOST = "DESKTOP-C5O3JKJ";
+    private final String HOST = "/*insert host here*/";
     private final int PORT = 4224;
 
     private PlayerState pstate = PlayerState.WAITING;
