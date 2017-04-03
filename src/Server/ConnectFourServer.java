@@ -6,12 +6,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 /**
  * the server side code for the connect four game
- * creates the Game oblect and handles all communication between the clients
+ * creates the Game object and handles all communication between the clients
  *
  * @author James Lawson
  * @version 1.0 12/20/2016
@@ -19,7 +21,7 @@ import java.net.Socket;
 public class ConnectFourServer implements Runnable
 {
 
-    private final int port = 4224;
+    private final int port = 13000;
     //30 seconds
     private final int WAIT_TIME = 30000;
 
@@ -319,8 +321,6 @@ public class ConnectFourServer implements Runnable
      */
     public static void main(String[] args)
     {
-        System.out.println(System.currentTimeMillis()+ " :Host :\"" + System.getenv("COMPUTERNAME") + "\"\n");
-
         Thread server = new Thread(new ConnectFourServer());
         server.start();
         try {

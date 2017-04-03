@@ -19,8 +19,8 @@ import java.net.Socket;
  */
 public class PlayerClient implements Runnable
 {
-    private final String HOST = "/*insert host here*/";
-    private final int PORT = 4224;
+    private String HOST = "";
+    private final int PORT = 13000;
 
     private PlayerState pstate = PlayerState.WAITING;
     private ClientState cstate = ClientState.CREATED;
@@ -41,6 +41,8 @@ public class PlayerClient implements Runnable
     {
         gameGUI = new TestGUI();
 
+        HOST = JOptionPane.showInputDialog(null,"Enter the host name.","",JOptionPane.QUESTION_MESSAGE);
+
         try
         {
             System.out.println(System.currentTimeMillis()+ " :connecting to server...");
@@ -54,7 +56,10 @@ public class PlayerClient implements Runnable
         }
         catch (IOException e)
         {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+            gameGUI.cleanUp();
             e.printStackTrace();
+            System.exit(0);
         }
     }
 
@@ -141,16 +146,19 @@ public class PlayerClient implements Runnable
                     case "WON":
                         System.out.println(System.currentTimeMillis() + " :you won!");
                         gameGUI.updateBoard(Integer.parseInt(spltmess[1]), true);
+                        gameGUI.doWin();
                         pstate = PlayerState.WON;
                         break;
                     case "LOSS":
                         System.out.println(System.currentTimeMillis() + " :you lost!");
                         gameGUI.updateBoard(Integer.parseInt(spltmess[1]), false);
+                        gameGUI.doLoss();
                         pstate = PlayerState.LOST;
                         break;
                     case "DRAW":
                         System.out.println(System.currentTimeMillis() + " :the game was a draw!");
                         gameGUI.updateBoard(Integer.parseInt(spltmess[1]), true);
+                        gameGUI.doDraw();
                         pstate = PlayerState.DRAW;
                         break;
                     case "GOOD MOVE":
